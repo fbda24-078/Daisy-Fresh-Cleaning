@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning Supplies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: #007bff;
+            color: white;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .product {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .product h3 {
+            margin: 10px 0;
+        }
+        .product p {
+            color: #555;
+        }
+        .add-to-cart {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .add-to-cart:hover {
+            background: #218838;
+        }
+
+        /* Cart Section */
+        .cart {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+        .cart h2 {
+            text-align: center;
+            color: #333;
+        }
+        .cart-items {
+            list-style: none;
+            padding: 0;
+        }
+        .cart-items li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .cart-items li:last-child {
+            border-bottom: none;
+        }
+        .cart-total {
+            text-align: right;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 0;
+        }
+        .checkout {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+        }
+        .checkout:hover {
+            background: #0056b3;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .back-button:hover {
+            background: #5a6268;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Cleaning Supplies</h1>
+        </div>
+
+        <section id="products" class="products">
+            <div class="product">
+                <img src="broom.jpg" alt="Broom">
+                <h3>Broom</h3>
+                <p>High-quality broom for easy cleaning.</p>
+                <p><strong>Price: P98</strong></p>
+                <button class="add-to-cart" data-name="Broom" data-price="98">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="mop.jpg" alt="Mop">
+                <h3>Mop</h3>
+                <p>Super absorbent mop for spotless floors.</p>
+                <p><strong>Price: P150</strong></p>
+                <button class="add-to-cart" data-name="Mop" data-price="150">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="detergent.jpg" alt="Detergent">
+                <h3>Detergent</h3>
+                <p>Powerful cleaning detergent for tough stains.</p>
+                <p><strong>Price: P80</strong></p>
+                <button class="add-to-cart" data-name="Detergent" data-price="80">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="sponge.jpg" alt="Sponge">
+                <h3>Sponge</h3>
+                <p>Durable and effective cleaning sponge.</p>
+                <p><strong>Price: P50</strong></p>
+                <button class="add-to-cart" data-name="Sponge" data-price="50">Add to Cart</button>
+            </div>
+        </section>
+
+        <!-- Shopping Cart -->
+        <div class="cart">
+            <h2>Shopping Cart</h2>
+            <ul class="cart-items"></ul>
+            <div class="cart-total">Total: $0</div>
+            <button class="checkout">Checkout</button>
+        </div>
+
+        <!-- Back to Index Button -->
+        <button class="back-button" onclick="goToIndex()">⬅ Back to Index</button>
+
+    </div>
+
+    <script>
+        let cart = [];
+        const cartItemsContainer = document.querySelector('.cart-items');
+        const cartTotalContainer = document.querySelector('.cart-total');
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function () {
+                const name = this.getAttribute('data-name');
+                const price = parseFloat(this.getAttribute('data-price'));
+
+                // Check if item is already in cart
+                const existingItem = cart.find(item => item.name === name);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({ name, price, quantity: 1 });
+                }
+
+                updateCart();
+            });
+        });
+
+        function updateCart() {
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                const li = document.createElement('li');
+                li.innerHTML = `${item.name} (x${item.quantity}) - P${item.price * item.quantity}`;
+                cartItemsContainer.appendChild(li);
+            });
+
+            cartTotalContainer.innerText = `Total: P${total}`;
+        }
+
+        document.querySelector('.checkout').addEventListener('click', function () {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+            } else {
+                alert("Thank you for your purchase! Your order has been placed.");
+                cart = []; // Clear the cart after checkout
+                updateCart();
+            }
+        });
+
+        function scrollToProducts() {
+            document.getElementById("products").scrollIntoView({ behavior: "smooth" });
+        }
+
+        function goToIndex() {
+            window.location.href = "index.html"; // Redirect to index page
+        }
+    </script>
+
+</body>
+</html>

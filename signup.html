@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        /* Basic styling for the signup page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        .sign {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .login-link {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .login-link a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <p class="title">Create Account</p>
+        <form class="form" id="signup-form">
+            <div class="input-group">
+                <label for="new-username">Username</label>
+                <input type="text" name="new-username" id="new-username" placeholder="Enter your username">
+            </div>
+            <div class="input-group">
+                <label for="new-password">Password</label>
+                <input type="password" name="new-password" id="new-password" placeholder="Enter your password">
+            </div>
+            <div class="input-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm your password">
+            </div>
+            <button class="sign" type="submit" onclick="handleSignup(event)">Sign Up</button>
+        </form>
+        <p class="login-link">Already have an account? 
+            <a href="signin.html">Sign In</a>
+        </p>
+    </div>
+
+    <script>
+        // Handle the signup form submission
+        function handleSignup(event) {
+            event.preventDefault();  // Prevent the form from submitting the traditional way
+            const username = document.getElementById('new-username').value;
+            const password = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            // Check if password and confirm password match
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Add logic for handling the signup here, e.g., saving data to a server
+            alert(`Signed up with Username: ${username}\nPassword: ${password}`);
+        }
+    </script>
+
+</body>
+</html>

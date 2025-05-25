@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaisyFresh Cleaning</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* Light blue background */
+            text-align: center;
+        }
+
+        /* Title Styles */
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            color: #f43f5e;
+        }
+
+        /* Cards Section - Centered */
+        .cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .cards .card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            height: 150px;
+            width: 250px;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: 400ms;
+        }
+
+        .cards .red {
+            background-color: #f43f5e;
+        }
+
+        .cards .blue {
+            background-color: #3b82f6;
+        }
+
+        .cards .green {
+            background-color: #22c55e;
+        }
+
+        .cards .card p.tip {
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .cards .card p.second-text {
+            font-size: .9em;
+        }
+
+        .cards .card a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .cards .card:hover {
+            transform: scale(1.1, 1.1);
+        }
+
+        .cards:hover > .card:not(:hover) {
+            filter: blur(10px);
+            transform: scale(0.9, 0.9);
+        }
+
+        /* Logout Button Style */
+        .logout-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #f43f5e;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 30px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .logout-button:hover {
+            background-color: #dc2626;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Title -->
+    <div class="title">DaisyFresh Cleaning</div>
+
+    <!-- Cards Section with Links -->
+    <div class="cards">
+        <div class="card red">
+            <a href="AddtoCart.html">
+                <p class="tip">Book Us</p>
+                <p class="second-text">Book Our Services</p>
+            </a>
+        </div>
+        <div class="card blue">
+            <a href="products.html">
+                <p class="tip">Products</p>
+                <p class="second-text">Explore our cleaning products</p>
+            </a>
+        </div>
+        <div class="card green">
+            <a href="AboutUs.html">
+                <p class="tip">About Us</p>
+                <p class="second-text">Learn more about our company</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Logout Button -->
+    <a href="signin.html" class="logout-button">Logout</a>
+
+</body>
+</html>

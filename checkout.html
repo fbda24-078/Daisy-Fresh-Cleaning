@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <ul id="checkout-items"></ul>
+    <p id="total-price"></p>
+    <button onclick="confirmPurchase()">Confirm Purchase</button>
+
+    <script>
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const checkoutList = document.getElementById('checkout-items');
+        const totalPriceElement = document.getElementById('total-price');
+
+        let total = 0;
+        cart.forEach(item => {
+            total += item.price * item.quantity;
+            const li = document.createElement('li');
+            li.innerText = `${item.name} (x${item.quantity}) - P${item.price * item.quantity}`;
+            checkoutList.appendChild(li);
+        });
+
+        totalPriceElement.innerText = `Total: P${total}`;
+
+        function confirmPurchase() {
+            alert("Thank you for your purchase!");
+            localStorage.clear();
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
